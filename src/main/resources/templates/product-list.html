@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<meta charset="UTF-8" />
+<title>Product list</title>
+<style>
+.products-container {
+  	display:flex;
+	justify-content:space-around;
+	flex-wrap:wrap;
+}
+	
+
+ img {
+	width:auto;
+	height:50%;
+}
+h1{
+	
+	text-align:center;
+	color:blue;
+}
+.button-position{
+	display:flex;
+	justify-content:space-around;
+	}
+	
+.addProduct{
+display:flex;
+justify-content:center;
+	
+}
+
+</style>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+ 
+<body>
+<div class="container-fluid">
+<h1>Product List</h1>
+<div class="addProduct">
+<a href="addProduct" class="btn btn-success">Add Product</a>
+</div>
+ <br/><br/>
+ <!--<p>
+<strong>Code: </strong> <span th:text="${products[0].code}"></span>
+</p>-->
+<div class="products-container">
+  <div class="card" style="width:18rem;margin-bottom:0.5rem" th:each="product:${products}">
+  <th:block  th:if="${product.img}">
+    <img th:src="@{|img/${product.img}|}" alt="image du produit" class="card-img-top">
+  </th:block>
+  <th:block  th:unless="${product.img}">
+    <img th:src="@{img/no-image.jpg}" alt="pas d'image"  class="card-img-top">
+  </th:block>
+  <div class="card-body" >
+    <h5 class="card-title" th:text="${product.name}"></h5>
+    <p class="card-text"><p><strong>Code: </strong><span th:text="${product.code}"></span></p>
+
+	<p>
+      <strong>Price: </strong> <span th:text="${product.price}"></span> DT
+     </p>
+
+</p>
+<div class="button-position">
+    <form th:action="@{|/deleteProduct/${product.id}|}" method="GET">
+<input type="submit" value="Delete" class="btn btn-danger"/></form>
+<form th:action="@{|/editProduct/${product.id}|}" method="GET">
+<input type="submit" value="Edit" class="btn btn-warning"/></form>
+
+</div>
+  </div>
+</div>
+</div>
+</body>
+</html>

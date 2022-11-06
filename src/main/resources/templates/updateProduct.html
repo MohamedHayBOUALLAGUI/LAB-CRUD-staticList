@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+ <meta charset="UTF-8" />
+ <title>Update Product</title>
+ <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+ </head>
+ <body>
+ <h1>Update a product:</h1>
+ <form th:action="@{|/updateProduct/${product.id}|}"
+ th:object="${product}" method="POST">
+ Code:
+ <input type="text" th:field="*{code}" /> 
+ <br/>
+ Name:
+ <input type="text" th:field="*{name}" /> 
+ <br/>
+  Price:
+ <input type="text" th:field="*{price}" /> 
+ <br/>
+   Image:
+ <input type="text" th:field="*{img}" /> 
+ <br/>
+ <input type="submit" value="Update" />
+  
+ </form>
+ <!--<form th:action="@{|/updateProduct/${product.id}|}" method="POST">-->
+ 
+ <br/>
+<a href="product-list"><input type="button" value="Return" /></a>
+ <br/>
+ <!-- Check if errorMessage is not null and not empty --> 
+ <div th:if="${errorMessage}" th:text="${errorMessage}"
+ style="color:red;font-style:italic;">
+ ...
+ </div> 
+ </body>
+</html>
